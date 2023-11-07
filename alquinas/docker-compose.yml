@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: alquinas-api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8081"]
+    ports:
+      - "8081:8081"
+    environment:
+      MYSQL_USER: "alquinas"
+      MYSQL_PASSWORD: "008"
+    depends_on:
+      - mysql
+    networks:
+      - net-alquinas
+
+  mysql:
+    container_name: alquinas-mysql
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "007"
+      MYSQL_DATABASE: alquinas
+      MYSQL_USER: "alquinas"
+      MYSQL_PASSWORD: "008"
+    command: --bind-address=0.0.0.0
+    ports:
+      - "3036:3036"
+    networks:
+      - net-alquinas
+
+  test:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: ["python", "-m", "unittest", "discover"]
+    depends_on:
+      - api
+      - mysql
+    networks:
+      - net-alquinas 
+
+volumes:
+  mysql_data:
+
+networks:
+  net-alquinas:  
+    name: net-alquinas
+    driver: bridge
