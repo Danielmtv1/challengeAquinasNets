@@ -17,7 +17,7 @@ def wait_for_mysql():
             print("MySQL connect...")
             break
         except mysql.connector.Error:
-            print("Waiting for MySQL...")
+            print("Please Waiting for MySQL Connection...")
             time.sleep(1)
 
 

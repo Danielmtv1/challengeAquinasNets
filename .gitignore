@@ -1,0 +1,17 @@
+# Configuration files
+.vscode/
+
+# Ignorar directorios de entorno virtual
+.env
+.venv
+env/
+venv/
+
+# Cache and log files
+__pycache__/
+*.pyc
+*.log
+
+# Backup files
+*~
+*.swp

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api:
-    container_name: alquinas-api
+    container_name: aquinas-api
     build:
       context: ./
       dockerfile: Dockerfile
@@ -12,10 +12,11 @@ services:
     environment:
       MYSQL_USER: "alquinas"
       MYSQL_PASSWORD: "008"
+      MYSQL_DATABASE: alquinas
     depends_on:
       - mysql
     networks:
-      - net-alquinas
+      - net-aquinas
 
   mysql:
     container_name: alquinas-mysql
@@ -28,25 +29,28 @@ services:
       MYSQL_PASSWORD: "008"
     command: --bind-address=0.0.0.0
     ports:
-      - "3036:3036"
+      - "3306:3306"
     networks:
-      - net-alquinas
+      - net-aquinas
 
   test:
     build:
       context: ./
       dockerfile: Dockerfile
+    environment:
+      MYSQL_USER: "alquinas"
+      MYSQL_PASSWORD: "008"
+      MYSQL_DATABASE: alquinas  
     command: ["python", "-m", "unittest", "discover"]
     depends_on:
-      - api
       - mysql
     networks:
-      - net-alquinas 
+      - net-aquinas 
 
 volumes:
   mysql_data:
 
 networks:
-  net-alquinas:  
-    name: net-alquinas
+  net-aquinas:  
+    name: net-aquinas
     driver: bridge
