@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, Path
 from domain.models.wanted import Wanted
-from domain.schemas.wanted import WantedItem
 from core.request_fbi import (
     get_wanted_state,
     extract_wanted_data)
