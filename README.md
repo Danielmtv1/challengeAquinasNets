@@ -52,7 +52,7 @@ To install, you need to clone the repository. Once the repository has been clone
 make api
 ```
 
-When running "make api," three containers are created: one for the database, another for the API, and a third one specifically for running tests. The third container executes the tests and then terminates. You can check out the Swagger documentation at the following address: http://0.0.0.0:8081/docs#/. There, you will find four routes: one for testing and three functional routes. 
+When running "make api," three containers are created: one for the database, another for the API, and a third one specifically for running tests. The third container executes the tests and then terminates. You can check out the Swagger documentation at the following address: http://0.0.0.0:8081/docs#/. There, you will find three functional routes. 
 
 if you need run test just need run :
 ```sh
